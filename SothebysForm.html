@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!--View-->
+<h3>Please fill the form</h3>
+
+<label>Property Designation---</label>
+<input type="text" id="propertyDesignationField"><br><br>
+
+<label>Description--------------</label>
+<input type="text" id="descriptionField"><br><br>
+
+<label>Size-----------------------</label>
+<input type="text" id="sizeField"><br><br>
+
+<label>Estimation---------------</label>
+<input type="text" id="estimationField"><br><br>
+
+<label>Chinese Notes-----------</label>
+<input type="text" id="chineseNotesField"><br><br>
+
+<button onclick="onDownloadButton()">DOWNLOAD</button>
+
+<!--Logic-->
+<script>
+    function onDownloadButton() {
+        var data = {
+            "propertyDesignation": document.getElementById("propertyDesignationField").value, 
+            "description": document.getElementById("descriptionField").value,
+            "size": document.getElementById("sizeField").value,
+            "estimation": document.getElementById("estimationField").value,
+            "chineseNotes": document.getElementById("chineseNotesField").value,
+        };
+
+        var json = JSON.stringify(data, null, 1);
+
+        download("description.txt", json);
+    }
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+</script>
+
+</body>
+</html>
